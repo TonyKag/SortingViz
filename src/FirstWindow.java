@@ -1,22 +1,20 @@
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 
 /** 
-* Author Yutaka
+* @author Yutaka
 * Program Sorting Algorithms Visualization
 * v.1.0.1
 */
 
 public class FirstWindow {
 	public static void main(String[] args) {
-		System.out.println("first window class");
 	      EventQueue.invokeLater(new Runnable()
 	       {
 	           public void run()
 	           {
 	               JFrame frame= new GraphFrame();
-	               frame.setTitle("GraphTest");
+	               frame.setTitle("Sorting Vizualization");
 	               frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	               frame.setVisible(true);
 	           }
