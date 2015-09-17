@@ -52,9 +52,7 @@ public class GraphPanel extends JPanel{
             {
                 if( current_layer!=1)
                 {
-   //                 points = (ArrayList<GraphPoint>)layers.get(current_layer-2).getKey();
-     //               edges =(ArrayList<Pair>)layers.get(current_layer-2).getValue();
-                    current_layer--;
+                   current_layer--;
                     GraphPanel.this.repaint();
                 }
             }
@@ -64,11 +62,6 @@ public class GraphPanel extends JPanel{
    public GraphPanel()
    {
       
-   //   layers = new ArrayList<Pair>();
-   //   layers.add( new Pair(new ArrayList<GraphPoint>(), new ArrayList<Pair>()));
-
- //     points = (ArrayList<GraphPoint>)layers.get(0).getKey();
-  //    edges=(ArrayList<Pair>)layers.get(0).getValue();
       current = null;
       prev = null;
 
@@ -80,7 +73,6 @@ public class GraphPanel extends JPanel{
       imap.put(KeyStroke.getKeyStroke("ctrl A"),"downLayer");
 
       ActionMap amap = this.getActionMap();
-  //    amap.put("upLayer", upLayer);
       amap.put("downLayer", downLayer);
    }
    
@@ -97,11 +89,7 @@ public class GraphPanel extends JPanel{
        }
       
       g2.setPaint(Color.BLACK);
-   //   for(Pair p: edges)
-/*      {
-          g2.draw(new Line2D.Double(((GraphPoint)p.getKey()).getPoint(),((GraphPoint)p.getValue()).getPoint()));
-      }
-*/      g2.setFont(f);
+      g2.setFont(f);
       g2.drawString("Current layer: "+current_layer,this.getWidth()-200,this.getHeight()-10);
    }
    
@@ -130,43 +118,12 @@ public class GraphPanel extends JPanel{
       if (s == current) 
       {
         current = null;
-  //      Iterator<Pair> it=edges.iterator();
- //       while(it.hasNext())
-  //      {
-  //          Pair p=it.next();
-   //         if(p.getKey().equals(s) || p.getValue().equals(s))
-  //              it.remove();
-  //      }
 	points.remove(s);
       }
       repaint();
    }
    
-   //bind to points(left,right) with edge(if it was not) or delete edge otherwise.
- /*  public void edge(GraphPoint left,GraphPoint right)
-   {
-       Pair leftPair=new Pair(left,right);
-       Pair rightPair=new Pair(right,left);
-       for(Pair r: edges)
-       {
-           if(r.equals(leftPair))
-           {
-               edges.remove(r);
-               repaint();
-               return;
-           }
-           else if(r.equals(rightPair))
-           {
-               edges.remove(r);
-               repaint();
-               return;
-           }
-       }
-       edges.add(new Pair(left,right));
-       repaint();
-   }*/
-   
-   private class MouseHandler extends MouseAdapter
+    private class MouseHandler extends MouseAdapter
    {
       public void mousePressed(MouseEvent event)
       {
@@ -220,53 +177,7 @@ public class GraphPanel extends JPanel{
       }
    }
       
-   //load from file   
-  /* public void load(String name)
-      {
-          try(Scanner in=new Scanner(Paths.get(name)))
-          {
-            int count=in.nextInt();
-            ArrayList<GraphPoint> loadPoints=new ArrayList<>(count);
-  //          ArrayList<Pair> loadEdges=new ArrayList<>();
-            int left;
-            int right;
-            try
-            {
-                for(int i=0;i<count;++i)
-                {
-                    loadPoints.add(new GraphPoint(new Point2D.Double(in.nextDouble(), in.nextDouble() ) ) );
-                }
-            }
-            catch(NoSuchElementException e)
-            {
-              JOptionPane.showMessageDialog(this,
-              "Incorrect file. Please load correct .gph file",
-              "file input error",
-               JOptionPane.ERROR_MESSAGE);                    
-              System.err.format("NoSuchElementException:%s%n",e);
-              return;
-            }
-            try
-            {
-                while(true)
-                    loadEdges.add(new Pair(loadPoints.get(in.nextInt()),loadPoints.get(in.nextInt()) ) );
-            }
-            catch(NoSuchElementException e)
-            {
-               System.err.format("NoSuchElementException:%s%n",e);  
-            }
-            points = loadPoints;
-            edges=loadEdges;
-            layers.set(current_layer-1, new Pair(loadPoints,loadEdges));
-            in.close();
-            repaint();
-          }
-          catch(IOException x)
-          {          
-              System.err.format("IOExeption:%s%n",x);
-          }
-      }
-      */
+ 
    //save to file   
    public void save(String name)
       {
@@ -278,11 +189,6 @@ public class GraphPanel extends JPanel{
                 out.write(Double.toString(r.getPoint().getX()) + " " + Double.toString(r.getPoint().getY()) + "\n");  
               }
               
-    /*          for(Pair p : edges)
-              {
-                out.write(Integer.toString(points.indexOf(p.getKey())) + " " + Integer.toString(points.indexOf(p.getValue())) + "\n");  
-              }
-              */
               out.close();
           }
           catch(IOException x)
